@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import SplashView from './views/SplashView';
 import LoginView from './views/LoginView';
 import HomeView from './views/HomeView';
@@ -58,7 +59,15 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white text-black font-sans selection:bg-accent selection:text-white">
-      {renderView()}
+      <AnimatePresence mode="wait">
+        {currentView === 'splash' ? (
+          <SplashView key="splash" onComplete={() => navigateTo('login')} />
+        ) : (
+          <div key="content">
+            {renderView()}
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

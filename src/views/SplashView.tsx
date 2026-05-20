@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import splashImg from '../assets/splash.png';
 
 interface SplashViewProps {
@@ -7,62 +7,61 @@ interface SplashViewProps {
 }
 
 const SplashView: React.FC<SplashViewProps> = ({ onComplete }) => {
+  const [showLogo, setShowLogo] = useState(false);
   const [showTap, setShowTap] = useState(false);
-  const [isFadingOut, setIsFadingOut] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowTap(true);
-    }, 2500); // 1.0s fade + 0.5s static + some buffer
-    return () => clearTimeout(timer);
+    // Standard sequence:
+    // 0s: start
+    // 0.1s: logo fade-in starts (1s)
+    // 1.1s: logo is fully visible
+    // 1.6s: logo fade-out starts (1s)
+    // 2.6s: logo is hidden, tap text appears
+
+    const showLogoTimer = setTimeout(() => setShowLogo(true), 100);
+    const hideLogoTimer = setTimeout(() => setShowLogo(false), 1600);
+    const showTapTimer = setTimeout(() => setShowTap(true), 2600);
+
+    return () => {
+      clearTimeout(showLogoTimer);
+      clearTimeout(hideLogoTimer);
+      clearTimeout(showTapTimer);
+    };
   }, []);
 
-  const handleStart = () => {
-    setIsFadingOut(true);
-    setTimeout(() => {
-      onComplete();
-    }, 1000); // Match fade-out duration
-  };
-
   return (
-    <AnimatePresence>
-      {!isFadingOut && (
-        <motion.div
-          id="brand-splash"
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.0, ease: "easeInOut" }}
-          className="fixed inset-0 bg-white flex flex-col items-center justify-center z-[10000] cursor-pointer"
-          onClick={handleStart}
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.0, ease: "easeInOut" }}
-            className="flex items-center justify-center p-8"
-          >
-            <img 
-              src={splashImg} 
-              alt="Brand Logo" 
-              className="max-w-[80%] max-h-[60vh] object-contain"
-            />
-          </motion.div>
+    <motion.div
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1.0, ease: "easeInOut" }}
+      className="fixed inset-0 bg-white flex flex-col items-center justify-center z-[10000] cursor-pointer touch-none"
+      onClick={onComplete}
+    >
+      <motion.div
+        animate={{ opacity: showLogo ? 1 : 0, scale: showLogo ? 1 : 0.9 }}
+        transition={{ duration: 1.0, ease: "easeInOut" }}
+        className="flex items-center justify-center p-8"
+      >
+        <img 
+          src={splashImg} 
+          alt="Brand Logo" 
+          className="max-w-[80%] max-h-[60vh] object-contain"
+        />
+      </motion.div>
 
-          {showTap && (
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: [0.3, 1] }}
-              transition={{ 
-                opacity: { duration: 1, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }
-              }}
-              className="absolute bottom-[25%] text-gray-400 text-lg font-medium"
-            >
-              タップしてスタート
-            </motion.p>
-          )}
-        </motion.div>
+      {showTap && (
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0.3, 1] }}
+          transition={{ 
+            opacity: { duration: 1, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }
+          }}
+          className="absolute bottom-[25%] text-gray-400 text-lg font-medium tracking-wider"
+        >
+          タップしてスタート
+        </motion.p>
       )}
-    </AnimatePresence>
+    </motion.div>
   );
 };
 
