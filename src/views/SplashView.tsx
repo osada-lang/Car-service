@@ -56,7 +56,8 @@ const SplashView: React.FC<SplashViewProps> = ({ onComplete }) => {
           transition={{ 
             opacity: { duration: 1, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }
           }}
-          className="absolute bottom-[25%] text-gray-400 text-lg font-medium tracking-wider"
+          style={{ color: '#999', fontSize: '1rem' }}
+          className="absolute bottom-[25%] font-medium tracking-wider"
         >
           タップしてスタート
         </motion.p>
