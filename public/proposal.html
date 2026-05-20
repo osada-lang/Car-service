@@ -42,7 +42,7 @@
                     <svg class="w-10 h-10 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                 </div>
                 <h3 class="text-xl font-bold mb-4">AI予測カルテ & 通知</h3>
-                <p class="text-gray-500 text-sm">運転傾向から走行距離を予測。オイル交換などの最適なタイミングをAIが算出し、スマホへプッシュ通知。再来店を自動で促します。</p>
+                <p class="text-gray-500 text-sm">運転傾向から走行距離を予測。オイル交換などの最適なタイミングをAIが算出し、スマホへプッシュ通知。来店までホーム画面に警告灯を表示し続け、再来店を確実に促します。</p>
             </div>
             <div class="text-center">
                 <div class="w-20 h-20 bg-accent/10 rounded-[30px] flex items-center justify-center mx-auto mb-6">
@@ -79,18 +79,22 @@
                         <p class="text-gray-600 leading-relaxed">
                             事故や故障。いざという時、人は誰でもパニックになります。本アプリは、単なる管理ツールではなく、常にポケットに入っている「お守り」です。
                         </p>
-                        <ul class="space-y-3">
-                            <li class="flex items-center gap-2 font-bold text-sm">
-                                <span class="w-5 h-5 bg-accent text-white rounded-full flex items-center justify-center text-[10px]">✓</span>
-                                迷わず行動できる「事故対応フロー」をガイド
+                        <ul class="grid grid-cols-1 gap-2">
+                            <li class="flex items-center gap-2 font-bold text-xs text-gray-700">
+                                <span class="w-4 h-4 bg-accent text-white rounded-full flex items-center justify-center text-[8px]">✓</span>
+                                パニックを鎮める事故対応ステップガイド
                             </li>
-                            <li class="flex items-center gap-2 font-bold text-sm">
-                                <span class="w-5 h-5 bg-accent text-white rounded-full flex items-center justify-center text-[10px]">✓</span>
-                                ワンタップで警察・保険会社・店舗へ即時連絡
+                            <li class="flex items-center gap-2 font-bold text-xs text-gray-700">
+                                <span class="w-4 h-4 bg-accent text-white rounded-full flex items-center justify-center text-[8px]">✓</span>
+                                ワンタップ緊急連絡（110番・保険・店舗）
                             </li>
-                            <li class="flex items-center gap-2 font-bold text-sm">
-                                <span class="w-5 h-5 bg-accent text-white rounded-full flex items-center justify-center text-[10px]">✓</span>
-                                <b>消されないからこそ、車検や乗り換えの通知が届き続ける。</b>
+                            <li class="flex items-center gap-2 font-bold text-xs text-gray-700">
+                                <span class="w-4 h-4 bg-accent text-white rounded-full flex items-center justify-center text-[8px]">✓</span>
+                                <b>警告灯の持続表示：来店するまでアプリ内で注意喚起を継続</b>
+                            </li>
+                            <li class="flex items-center gap-2 font-bold text-xs text-gray-700">
+                                <span class="w-4 h-4 bg-accent text-white rounded-full flex items-center justify-center text-[8px]">✓</span>
+                                消されないからこそ、車検や乗り換え通知が届き続ける
                             </li>
                         </ul>
                         <p class="text-accent font-black text-sm pt-4 border-t border-gray-100">
