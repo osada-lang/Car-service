@@ -38,6 +38,7 @@ const SplashView: React.FC<SplashViewProps> = ({ onComplete }) => {
       onClick={onComplete}
     >
       <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: showLogo ? 1 : 0, scale: showLogo ? 1 : 0.9 }}
         transition={{ duration: 1.0, ease: "easeInOut" }}
         className="flex items-center justify-center p-8"
